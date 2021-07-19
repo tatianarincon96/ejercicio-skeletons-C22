@@ -49,7 +49,54 @@ const pokemons = ["pikachu", "bulbasaur", "charmander", "diglett"];
 pokemons.forEach((pokemon, index) => {
   const pokemonNumber = index + 1;
   createPokemonCard(pokemon, pokemonNumber);
+  const cards = document.querySelectorAll(".card");
+  cards.forEach(card => card.classList.add("oculto"));
   showLoadingSkeleton(pokemon, pokemonNumber);
   // Simulamos una demora en la carga de los recursos.
-  setTimeout(() => fillPokemonData(pokemon, pokemonNumber), 3000);
+  setTimeout(() => {
+    const skeletonCards = document.querySelectorAll(".card-loader");
+    skeletonCards.forEach(card => card.classList.add("oculto"));
+    cards.forEach(card => card.classList.remove("oculto"));
+    fillPokemonData(pokemon, pokemonNumber)}, 5000);
 });
+
+function showLoadingSkeleton(pokemon, order) {
+  const body = document.querySelector("main");
+  const skeletonContainer = document.createElement("div");
+  skeletonContainer.className = "card-loader";
+
+  skeletonContainer.innerHTML = `
+    <img
+      src=""
+      class="imagen-loader"
+      alt="pokemon-${order}"
+      id="imagen-pokemon-${order}"
+    />
+    <div class="cuerpo-card-loader">
+      <h5 class="titulo-card-loader"</h5>
+      <p class="texto-card-loader">Skills</p>
+      <span class="nombre-skill-loader">HP</>
+      <div class="contenedor-barra-loader">
+        <div id="barra-hp-${order}"></div>
+        <span id="cantidad-hp-${order}"></span>
+      </div>
+      <span class="nombre-skill-loader">Ataque</>
+      <div class="contenedor-barra-loader">
+        <div id="barra-ataque-${order}"></div>
+        <span id="cantidad-ataque-${order}"></span>
+      </div>
+      <span class="nombre-skill-loader">Defensa</>
+      <div class="contenedor-barra-loader">
+        <div id="barra-defensa-${order}"></div>
+        <span id="cantidad-defensa-${order}"></span>
+      </div>
+      <span class="nombre-skill-loader">Velocidad</>
+      <div class="contenedor-barra-loader">
+        <div id="barra-velocidad-${order}"></div>
+        <span id="cantidad-velocidad-${order}"></span>
+      </div>
+    </div>
+  `;
+
+  body.appendChild(skeletonContainer);
+}

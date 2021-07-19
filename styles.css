@@ -86,12 +86,12 @@ header img {
 }
 
 .imagen-loader {
-  max-width: 80px;
-  height: 80px;
+  max-width: 130px;
+  height: 130px;
   border-radius: 50%;
   animation: animacionDeCarga 2s infinite;
   padding: 2rem;
-  margin: 2rem auto;
+  margin: 2rem 3rem;
   margin-top: 2.2rem;
 }
 
